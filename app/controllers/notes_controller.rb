@@ -76,6 +76,6 @@ class NotesController < ApplicationController
     def note_params
       params.require(:note).permit(:description)
       params.require(:note).permit(:title)
-      # params.require(:note).permit(:priority)
+      params.require(:note).permit(:priority)
     end
 end
