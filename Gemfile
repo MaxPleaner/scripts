@@ -44,6 +44,7 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
+
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
@@ -56,4 +57,7 @@ group :production do
 	gem 'pg'
 end
 
-gem 'rails_12factor' 
+
+group :production do
+    gem 'rails_12factor'
+end

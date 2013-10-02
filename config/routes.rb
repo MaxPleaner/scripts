@@ -4,7 +4,7 @@
 
 DeborahcProj2::Application.routes.draw do
 
-  get "notes/landing"
+  #get "notes/landing"
   resources :notes
 
 
