@@ -7,6 +7,10 @@ class NotesController < ApplicationController
     @notes = Note.all
   end
 
+  def landing
+    @notes = Note.all
+  end
+
   # GET /notes/1
   # GET /notes/1.json
   def show
@@ -19,6 +23,7 @@ class NotesController < ApplicationController
 
   # GET /notes/1/edit
   def edit
+
   end
 
   # POST /notes
@@ -70,5 +75,7 @@ class NotesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
       params.require(:note).permit(:description)
+      params.require(:note).permit(:title)
+      # params.require(:note).permit(:priority)
     end
 end
