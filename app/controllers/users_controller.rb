@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # Do not require login when users want to sign up
   skip_before_action :require_login, :only => [:new, :create]
 
+
   def new
   	@user = User.new
   end
@@ -23,6 +24,20 @@ class UsersController < ApplicationController
   def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
+
+
+
+    # Function to authenticate user with their email and password
+  def authenticate(email, password)
+    user = find_by(email: email)
+    # Check salted password hash is correct
+    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
+      user
+    else
+      nil
+    end
+  end
+  
 end
 
 
