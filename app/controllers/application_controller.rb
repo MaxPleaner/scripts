@@ -21,10 +21,7 @@ class ApplicationController < ActionController::Base
 
   # Function to return current logged in user based on user_id stored in session
   def current_user
-  	@current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
 	end
 end
-
-
-
 

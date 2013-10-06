@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   # Function to authenticate user with their email and password
   def self.authenticate(email, password)
     user = find_by(email: email)
+    logger.info "#{user}"
+    logger.info "cats and dogs"
     # Check salted password hash is correct
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user

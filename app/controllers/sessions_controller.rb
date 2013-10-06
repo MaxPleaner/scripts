@@ -9,9 +9,10 @@ class SessionsController < ApplicationController
     # Authenticate user by email and password
 		user = User.authenticate(params[:email], params[:password])
 		if user
-      # Store session for user
+      		# Store session for user
 			session[:user_id] = user.id
-      # Show page of all notes for user after successful login
+			current_user
+      		# Show page of all notes for user after successful login
 			redirect_to notes_path, :notice => "Logged in!"
 		else
 			flash.now.alert = "Invalid username or password"
