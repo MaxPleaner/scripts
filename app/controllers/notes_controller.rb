@@ -5,7 +5,7 @@ class NotesController < ApplicationController
   # Make sure user has privilege to show, edit, update or destroy a particular note
   before_action :validate_user
   # Index page already shows user the notes they have permission to view
-  skip_before_action :validate_user, :only => [:index, :landing]
+  skip_before_action :validate_user, :only => [:index, :landing, :new, :create]
 
   # GET /notes
   # GET /notes.json
