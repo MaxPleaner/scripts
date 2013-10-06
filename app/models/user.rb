@@ -18,11 +18,12 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
     user = find_by(email: email)
     logger.info "#{user}"
-    logger.info "cats and dogs"
     # Check salted password hash is correct
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
+      logger.info "cats and dogs"
+
       nil
     end
   end
