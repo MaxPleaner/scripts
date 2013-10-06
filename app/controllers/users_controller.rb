@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
   	if (@user.save)
       # Setting the session here allows users to login automatically after sign up
-      #session[:user_id] = @user.id
+      session[:user_id] = @user.id
       # Send to page with all notes after user is logged in
     	redirect_to notes_path, :notice => "Signed up!"
   	else

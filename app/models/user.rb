@@ -22,8 +22,6 @@ class User < ActiveRecord::Base
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
-      logger.info "cats and dogs"
-
       nil
     end
   end

@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 		if user
       		# Store session for user
 			session[:user_id] = user.id
-			current_user
+			# current_user
       		# Show page of all notes for user after successful login
 			redirect_to notes_path, :notice => "Logged in!"
 		else

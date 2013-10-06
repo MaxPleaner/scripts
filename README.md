@@ -20,6 +20,8 @@ I used Bootstrap for styling. There are some outstanding styling issues, such as
 
 # TeamNote 2.2
 
+Heroku Url: http://floating-temple-6591.herokuapp.com/
+
 Features:
 
 Two main features were added in this iteration. TeamNote now supports user accounts, and notes are now private to the users who created them. When a user first accesses the home page of the site, they are prompted to either sign in or sign up. 
