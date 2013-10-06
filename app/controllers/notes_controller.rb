@@ -1,6 +1,11 @@
 class NotesController < ApplicationController
+  # Find requested note
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-  skip_before_action :require_login, :only => [:landing,]
+  skip_before_action :require_login, :only => [:landing]
+  # Make sure user has privilege to show, edit, update or destroy a particular note
+  before_action :validate_user
+  # Index page already shows user the notes they have permission to view
+  skip_before_action :validate_user, :only => [:index, :landing]
 
   # GET /notes
   # GET /notes.json
@@ -62,6 +67,16 @@ class NotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to notes_url }
       format.json { head :no_content }
+    end
+  end
+
+  # Function to validate that user has permission to access a particular note
+  # Checks if the user_id associated with the requested note matches the user_id of the logged in user
+  # Redirects to users notes page if permission denied
+  def validate_user
+    unless @note.user_id == session[:user_id]
+      flash[:notice] = "You don't have permission to access this note!"
+      redirect_to notes_path
     end
   end
 
