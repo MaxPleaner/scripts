@@ -1,13 +1,16 @@
-# root 'welcome#index'
-# root 'homepage#welcome'
-# root 'homepage#hi'
-
 DeborahcProj2::Application.routes.draw do
+  # Start at landing page
+  root :to => "notes#landing"
 
-  get "notes/landing"
+  get "sessions/login" => "sessions#new", :as => "log_in"
+  get "users/new"
+  get "notes/landing" => "notes#landing", :as => "notes_landing"
+  get "sessions/logout" => "sessions#destroy", :as => "log_out"
+  get "users/signup" => "users#new", :as => "sign_up"
+
   resources :notes
-
-
+  resources :users
+  resources :sessions
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

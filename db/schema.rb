@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131002025543) do
+ActiveRecord::Schema.define(version: 20131006054140) do
 
   create_table "notes", force: true do |t|
     t.string   "description"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20131002025543) do
     t.string   "noteName"
     t.string   "priority"
     t.string   "title"
+    t.integer  "user_id"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "firstName"
+    t.string   "lastName"
+    t.string   "username"
+    t.string   "password_digest"
   end
 
 end

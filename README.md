@@ -16,3 +16,18 @@ Other comments:
 I used Bootstrap for styling. There are some outstanding styling issues, such as the spacing between buttons, but these will be fixed in the next iteration. 
 
 
+===
+
+# TeamNote 2.2
+
+Features:
+
+Two main features were added in this iteration. TeamNote now supports user accounts, and notes are now private to the users who created them. When a user first accesses the home page of the site, they are prompted to either sign in or sign up. 
+
+Design challenges:
+
+During this iteration, many design challenges arose unexpectedly. It turns out there's a lot of details that go into creating the seamless login/logout user experience we are accustomed to on the broader Internet!
+
+- Auto login after signup
+- How to make notes private
+- How to implement authentication - did by hand to understand how it would work. 

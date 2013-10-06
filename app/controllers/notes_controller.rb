@@ -1,14 +1,15 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
+  skip_before_action :require_login, :only => [:landing]
 
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    # only show user their notes when they view all notes
+    @notes = current_user.notes
   end
 
   def landing
-    @notes = Note.all
   end
 
   # GET /notes/1
@@ -23,14 +24,12 @@ class NotesController < ApplicationController
 
   # GET /notes/1/edit
   def edit
-
   end
 
   # POST /notes
   # POST /notes.json
   def create
     @note = Note.new(note_params)
-
     respond_to do |format|
       if @note.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
@@ -74,6 +73,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:description, :title, :priority)
+      params.require(:note).permit(:description, :title, :priority, :user_id)
     end
 end
