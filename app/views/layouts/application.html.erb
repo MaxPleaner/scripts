@@ -8,9 +8,21 @@
 </head>
 <body>
 
-  <% flash.each do |name, msg| %>
-<!--   <%= content_tag :div, msg, :id => "flash_#{name}" %>
--->  <% end %>
+
+
+<div id="user_nav">
+  <% if current_user %>
+  Logged in as <%= current_user.email %>.
+  <%= link_to "Log out", log_out_path %>
+  <% else %>
+  <%= link_to "Sign up", sign_up_path %> or
+  <%= link_to "log in", log_in_path %>
+  <% end %>
+
+     <% flash.each do |name, msg| %>
+   <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %> 
+</div>
 <!-- The navigation bar present at the top of each page -->
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
@@ -26,15 +38,7 @@
   </div>
 </div>
 <!-- Login and logout buttons -->
-<div id="user_nav">
-  <% if current_user %>
-  Logged in as <%= current_user.email %>.
-  <%= link_to "Log out", log_out_path %>
-  <% else %>
-  <%= link_to "Sign up", sign_up_path %> or
-  <%= link_to "log in", log_in_path %>
-  <% end %>
-</div>
+
 <div class="container">
  <%= yield %>
 </div>
