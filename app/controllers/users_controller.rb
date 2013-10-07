@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   	@user = User.new
   end
 
+  # Function to create a new user given whitelisted params and save into the database
   def create
     @user = User.new(user_params)
   	if (@user.save)
@@ -24,17 +25,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
-    # Function to authenticate user with their email and password
-  def authenticate(email, password)
-    user = find_by(email: email)
-    # Check salted password hash is correct
-    if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
-      user
-    else
-      nil
-    end
-  end
-  
+
 end
 
 
