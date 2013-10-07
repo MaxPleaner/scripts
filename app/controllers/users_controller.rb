@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   # Do not require login when users want to sign up
   skip_before_action :require_login, :only => [:new, :create]
 
-
   def new
   	@user = User.new
   end
@@ -24,8 +23,6 @@ class UsersController < ApplicationController
   def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
-
-
 
     # Function to authenticate user with their email and password
   def authenticate(email, password)
