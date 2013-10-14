@@ -2,9 +2,9 @@
 
 class User < ActiveRecord::Base
   # Each User has many notes. When a user account is deleted, all associated notes are deleted as well. 
-  has_many :notes, dependent: :destroy
+  #has_many :notes, dependent: :destroy
   attr_accessor :password
-  
+  has_and_belongs_to_many :notes
   before_save :encrypt_password
 
   # Each email and username must be unique

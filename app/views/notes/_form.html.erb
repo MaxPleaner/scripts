@@ -31,6 +31,11 @@
     <%= f.hidden_field :user_id, value: @current_user.id %><br>
   </div>
 
+  <div class="field">
+    <%= f.label :"Share with" %><br>
+    <%= select_tag "shared_with", options_from_collection_for_select(User.all, 'id', 'username', @note.users.map{ |j| j.id }), :multiple => true %>
+  </div>
+
 <div class="actions">
     <%= f.submit %>
 </div>

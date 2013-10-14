@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007013250) do
+ActiveRecord::Schema.define(version: 20131014215135) do
 
   create_table "notes", force: true do |t|
     t.text     "description", limit: 255
@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(version: 20131007013250) do
     t.string   "priority"
     t.string   "title"
     t.integer  "user_id"
+  end
+
+  create_table "notes_users", force: true do |t|
+    t.integer "note_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|

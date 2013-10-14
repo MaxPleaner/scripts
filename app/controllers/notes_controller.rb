@@ -35,8 +35,10 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
+    @users = User.where(:id => params[:shared_with])
     respond_to do |format|
       if @note.save
+        @note.users << @users
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render action: 'show', status: :created, location: @note }
       else
@@ -45,6 +47,7 @@ class NotesController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /notes/1
   # PATCH/PUT /notes/1.json
