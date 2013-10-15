@@ -33,7 +33,9 @@
 
 
   <div class="field">
-    <%= f.label :"Share with" %><br>
+    <% if @note.user_id == @current_user.id %>
+      <%= f.label :"Share with" %><br>
+    <%end %>
     <!-- Do not show option to share with yourself -->
     <%= select_tag "shared_with", options_from_collection_for_select(User.find(:all, :conditions => ["id != ?", current_user.id]), 'id', 'username', @note.users.map{ |j| j.id }), :multiple => true %>
   </div>

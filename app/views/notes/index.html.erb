@@ -6,7 +6,8 @@
   <div class="row-fluid">
   <% slice.each do |note| %>
   <div class="span4">
-    <h4> <%= note.title %></h4>
+    <h4> <%= link_to note.title, note_path(note.id) %></h4>
+
     <p><%= note.description %></p>
     <p>Priority: <%= note.priority %></p>
     <p>Created by: <%= note.get_author.username %></p>
