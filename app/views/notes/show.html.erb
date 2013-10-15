@@ -10,7 +10,7 @@
 		<p>Priority: <%= @note.priority %></p>
 
 
-		<p>Shared with <%= @note.users.map(&:username).join(",") %></p>
+		<p>Shared with: <%= @note.users.map(&:username).join(", ") %></p>
 
 
 		<div style="float:left;">
