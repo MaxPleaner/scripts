@@ -59,8 +59,11 @@ class NotesController < ApplicationController
   # PATCH/PUT /notes/1
   # PATCH/PUT /notes/1.json
   def update
+    #@users = User.where(:id => params[:shared_with])
+
     respond_to do |format|
       if @note.update(note_params)
+        #@note.users << @users
         format.html { redirect_to @note, notice: 'Note was successfully updated.' }
         format.json { head :no_content }
       else

@@ -28,8 +28,9 @@
 
   <!-- Hidden field to associate note with a specific user -->
   <div class="field">
-    <%= f.hidden_field :user_id, value: @current_user.id %><br>
+    <%= f.hidden_field :user_id, value: @note.user_id || @current_user.id %><br>
   </div>
+
 
   <div class="field">
     <%= f.label :"Share with" %><br>
