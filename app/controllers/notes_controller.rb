@@ -36,8 +36,11 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @users = User.where(:id => params[:shared_with])
+    # add the author as a user
+    @users << User.find(note_params[:user_id])
     respond_to do |format|
       if @note.save
+        # Add all users the note is shared with to @note.users
         @note.users << @users
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render action: 'show', status: :created, location: @note }
@@ -47,7 +50,11 @@ class NotesController < ApplicationController
       end
     end
   end
-
+  # Try to move to model later
+  # def add_author_permission
+  #   @note = Note.new(note_params)
+  #   @note.users << note_params[:user_id]
+  # end
 
   # PATCH/PUT /notes/1
   # PATCH/PUT /notes/1.json
@@ -77,7 +84,7 @@ class NotesController < ApplicationController
   # Checks if the user_id associated with the requested note matches the user_id of the logged in user
   # Redirects to users notes page if permission denied
   def validate_user
-    unless @note.user_id == session[:user_id]
+    unless @note.user_id == session[:user_id] || @note.users.include?(@current_user)
       flash[:notice] = "You don't have permission to access this note!"
       redirect_to notes_path
     end
@@ -91,6 +98,7 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:description, :title, :priority, :user_id)
+      params.require(:note).permit(:description, :title, :priority, :user_id, :shared_with)
     end
+
 end
