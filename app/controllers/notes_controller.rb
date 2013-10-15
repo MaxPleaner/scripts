@@ -58,8 +58,14 @@ class NotesController < ApplicationController
 
   # PATCH/PUT /notes/1
   # PATCH/PUT /notes/1.json
+
   def update
+    # Only the creators of the note may choose who to share the note with
+    # Dissociate the current users the note is shared with 
+    @note.users.destroy_all
+    # Update with most current list of users to share note with 
     @users = User.where(:id => params[:shared_with])
+    @users << User.find(note_params[:user_id])
     respond_to do |format|
       if @note.update(note_params)
         @note.users << @users
