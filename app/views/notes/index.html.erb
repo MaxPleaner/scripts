@@ -1,33 +1,18 @@
 <h2>Notepad</h2>
 
 <br>
-<%= button_to('Create new note', new_note_path, :class => 'btn btn-large btn-primary', :method => :get) %>
-  <% @notes.each_slice(3) do |slice| %>
-  <div class="row-fluid">
-  <% slice.each do |note| %>
-  <div class="span4">
-    <h4> <%= link_to note.title, note_path(note.id) %></h4>
-
-    <p><%= note.description %></p>
-    <p>Priority: <%= note.priority %></p>
-    <p>Created by: <%= note.get_author.username %></p>
-
-    <div style="float:left;">
-      <%= button_to('Edit', edit_note_path(note), :class => 'btn btn-med btn-primary', :method => :get) %>
-    </div>
-
-    <!-- Only give users the option to delete notes that they created, not for shared notes -->
-    <% if note.user_id == current_user.id %>
-      <div style="float:left;">
-        <%= button_to( 'Delete', note, method: :delete, :class => 'btn btn-med btn-primary', data: { confirm: 'Are you sure?' } )%>
-      </div>
-    <% end %> 
-  </div>
-
-
-  <% end %><!--/span-->
-</div>
+<%= form_tag notes_path, :method => 'get', :id => "notes_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
 <% end %>
+
+<%= button_to('Create new note', new_note_path, :class => 'btn btn-large btn-primary', :method => :get) %>
+<div id="notes"><%= render 'usernotes' %></div>
+
+
+
 
 
 

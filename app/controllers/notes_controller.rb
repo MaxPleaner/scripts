@@ -11,7 +11,9 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     # only show user their notes when they view all notes
-    @notes = current_user.notes
+    #@notes = current_user.notes.search([:search])
+    @notes = current_user.notes.search(params[:search])
+
   end
 
   def landing

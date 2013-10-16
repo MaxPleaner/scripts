@@ -19,3 +19,12 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+
+$(function() {
+
+  $("#notes_search input").keyup(function() {
+    $.get($("#notes_search").attr("action"), $("#notes_search").serialize(), null, "script");
+    return false;
+  });
+});

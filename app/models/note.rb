@@ -8,4 +8,14 @@ class Note < ActiveRecord::Base
   	def get_author
     	User.find(user_id)
   	end
+
+	def self.search(search)
+	  if search
+	    where('description LIKE ?', "%#{search}%")
+	  else
+	    scoped
+	  end
+	end
+
+
 end
