@@ -2,14 +2,16 @@
 
 <br>
 <%= form_tag notes_path, :method => 'get', :id => "notes_search" do %>
-  <p>
+  <h2>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
-  </p>
+  </h2>
 <% end %>
 
-<%= button_to('Create new note', new_note_path, :class => 'btn btn-large btn-primary', :method => :get) %>
+
+<%= button_to('Create new note', new_note_path, :class => 'btn btn-large btn-primary btn', :method => :get) %>
 <div id="notes"><%= render 'usernotes' %></div>
+
 
 
 

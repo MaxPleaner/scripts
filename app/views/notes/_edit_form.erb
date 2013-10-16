@@ -37,8 +37,14 @@
       <%= f.label :"Share with" %><br>
       <!-- Do not show option to share with yourself -->
       <%= select_tag "shared_with", options_from_collection_for_select(User.find(:all, :conditions => ["id != ?", current_user.id]), 'id', 'username', @note.users.map{ |j| j.id }), :multiple => true %>
+    <% else %>
+      <!-- Tell user who the note is being shared with -->
+      <div class="field">
+      Shared with: <%= @note.users.map(&:username).join(", ").gsub(@current_user.username, "You") %></p>
+  </div>
     <%end %>
   </div>
+<br>
 
 <div class="actions">
     <%= f.submit %>
