@@ -6,7 +6,7 @@ class Note < ActiveRecord::Base
 
 	# Get the user who originally created a note
   	def get_author
-    	User.find(user_id)
+    	User.find(author_id)
   	end
 
 	def self.search(search)

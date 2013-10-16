@@ -9,7 +9,7 @@
 		<p>Shared with: <%= @note.users.map(&:username).join(", ") %></p>
 		<div style="float:left;">
 			<%= button_to('Edit', edit_note_path(@note), :class => 'btn btn-med btn-primary', :method => :get) %></div>
-			<% if @note.user_id == @current_user.id %>
+			<% if @note.author_id == @current_user.id %>
 			<div style="float:left;">
 				<%= button_to( 'Delete', @note, method: :delete, :class => 'btn btn-med btn-primary', data: { confirm: 'Are you sure?' } )%>
 			</div>

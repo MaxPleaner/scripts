@@ -28,12 +28,12 @@
 
   <!-- Hidden field to associate note with a specific user -->
   <div class="field">
-    <%= f.hidden_field :user_id, value: @note.user_id || @current_user.id %><br>
+    <%= f.hidden_field :user_id, value: @note.author_id || @current_user.id %><br>
   </div>
 
   <div class="field">
     <!-- Only give user option to share note with other users if the current_user is the author -->
-    <% if @note.user_id == @current_user.id %>
+    <% if @note.author_id == @current_user.id %>
       <%= f.label :"Share with" %><br>
       <!-- Do not show option to share with yourself -->
       <%= select_tag "shared_with", options_from_collection_for_select(User.find(:all, :conditions => ["id != ?", current_user.id]), 'id', 'username', @note.users.map{ |j| j.id }), :multiple => true %>
