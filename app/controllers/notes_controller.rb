@@ -11,7 +11,7 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     # only show user their notes when they view all notes
-    #@notes = current_user.notes.search([:search])
+    # search within these notes if the user enters a search query
     @notes = current_user.notes.search(params[:search])
 
   end
@@ -63,10 +63,11 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.update(note_params)
         if params[:shared_with]
-
+          #Remove all sharees
           @note.users.destroy_all
-        #Update with most current list of users to share note with 
+          # Update with most current list of users to share note with 
           @users = User.where(:id => params[:shared_with])
+          # Add curren_user so they will show up in shared list when viewed by other sharees 
           @users << User.find(note_params[:author_id])
           @note.users << @users
         end
@@ -89,8 +90,9 @@ class NotesController < ApplicationController
     end
   end
 
-  # Function to validate that user has permission to access a particular note
+  # Function to validate that user has permission to view a particular note
   # Checks if the user_id associated with the requested note matches the user_id of the logged in user
+  # Or if user is a sharee of the note resource
   # Redirects to users notes page if permission denied
   def validate_user
     unless @note.author_id == session[:user_id] || @note.users.include?(@current_user)
@@ -109,5 +111,4 @@ class NotesController < ApplicationController
     def note_params
       params.require(:note).permit(:description, :title, :priority, :author_id, :shared_with)
     end
-
 end

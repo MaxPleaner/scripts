@@ -1,3 +1,5 @@
+<!-- Renders all notes a user may access on the users Notepad page -->
+
 <% @notes.each_slice(3) do |slice| %>
   <div class="row-fluid">
   <% slice.each do |note| %>
@@ -5,8 +7,7 @@
     <h4> <%= link_to note.title, note_path(note.id) %></h4>
     <p><%= note.description %></p>
     <p>Priority: <%= note.priority %></p>
-
-
+    <!-- Show "You" as necessary -->
     <% if note.get_author.username == current_user.username %>
       <p>Created by: You</p>
     <% else %>
@@ -17,7 +18,7 @@
       <%= button_to('Edit', edit_note_path(note), :class => 'btn btn-med btn-primary', :method => :get) %>
     </div>
 
-    <!-- Only give users the option to delete notes that they created, not for shared notes -->
+    <!-- Only give users the option to see delete button for notes that they created, not for shared notes -->
     <% if note.author_id == current_user.id %>
       <div style="float:left;">
         <%= button_to( 'Delete', note, method: :delete, :class => 'btn btn-med btn-primary', data: { confirm: 'Are you sure?' } )%>

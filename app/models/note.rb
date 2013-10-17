@@ -9,6 +9,7 @@ class Note < ActiveRecord::Base
     	User.find(author_id)
   	end
 
+  	# Return notes where the note's description contains a word in the search query
 	def self.search(search)
 	  if search
 	    where('description LIKE ?', "%#{search}%")
