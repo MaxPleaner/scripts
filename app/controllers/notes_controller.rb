@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   # Find requested note
   before_action :set_note, only: [:show, :edit, :update, :destroy]
+  before_action :can_delete, only: [:destroy]
   skip_before_action :require_login, :only => [:landing]
   # Make sure user has privilege to show, edit, update or destroy a particular note
   before_action :validate_user
@@ -100,6 +101,14 @@ class NotesController < ApplicationController
       redirect_to notes_path
     end
   end
+
+  def can_delete
+    unless @note.author_id == session[:user_id]
+      flash[:notice] = "You don't have permission to delete this note!"
+      redirect_to notes_path
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
