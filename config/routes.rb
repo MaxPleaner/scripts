@@ -11,6 +11,12 @@ DeborahcProj2::Application.routes.draw do
   resources :notes
   resources :users
   resources :sessions
+
+
+  #unless Rails.application.config.consider_all_requests_local
+    get '/404' =>'errors#not_found'
+  #end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
