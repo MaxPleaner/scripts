@@ -1,0 +1,11 @@
+#!/usr/bin/ruby
+
+url = ARGV.shift
+
+title = ARGV.shift
+
+File.open("#{title}.txt", "w") do |f|
+  f.write(`curl #{url} | w3m -dump -T text/html`)
+end
+
+puts File.read("#{title}.txt")
