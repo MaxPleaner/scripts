@@ -1,0 +1,11 @@
+#!/usr/bin/ruby
+
+require 'colored'
+
+
+text = `python3 /home/max/Desktop/scripts/lib/pocket.py -u`
+
+text.split("\n").each do |line|
+  puts line.black_on_white
+  puts "- - - - - - - - - ".green
+end
